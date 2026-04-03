@@ -326,25 +326,39 @@ Machine-readable index: [`registry.json`](registry.json) · API docs: [`API.md`]
 
 affiliate-skills are pure Markdown — they work with any AI. For enhanced capabilities, pair with these tools:
 
-### [hidrix-tools](https://github.com/sonpiaz/hidrix-tools) — MCP Server
+### [hidrix-tools](https://github.com/sonpiaz/hidrix-tools) — MCP Server + Pi Extension
 
-MCP server providing live social data tools. When connected, skills like `trending-content-scout` get exact engagement metrics instead of web search estimates.
+16-tool MCP server for live social data, scraping, and content analysis. When connected, skills like `trending-content-scout` get exact engagement metrics. Works with Claude Code (MCP), Pi (native extension), OpenClaw, Hermes, Cursor.
 
-| Tool | What it adds |
-|------|-------------|
-| `youtube_search` | YouTube video search with structured data |
-| `tiktok_search` | TikTok search with play counts and likes |
-| `x_search` | X/Twitter top tweet search |
-| `reddit_search` | Reddit posts with scores and comments |
-| `similarweb_traffic` | Website traffic analytics |
-| `web_search` | Brave Search for web research |
-| `web_fetch` | URL → clean markdown extraction |
+| Category | Tools | What they add |
+|----------|-------|---------------|
+| **Search** | `web_search`, `x_search`, `reddit_search`, `reddit_subreddit_top`, `youtube_search`, `tiktok_search` | Cross-platform search with engagement data |
+| **Scrape** | `web_fetch`, `x_thread_reader`, `x_user_posts`, `reddit_thread_reader`, `facebook_scraper` | Full content extraction — threads, pages, groups, ads |
+| **Analyze** | `content_scorer`, `content_analyzer` | Engagement scoring, topic clusters, pattern detection |
+| **Intel** | `similarweb_traffic` | Website traffic analytics |
+
+**Key upgrades (v2.0):**
+- `x_search` now returns likes, retweets, views + advanced operators (`from:user`, `min_faves:100`)
+- `x_thread_reader` reads full X threads and long-form articles
+- `facebook_scraper` scrapes groups, pages, keyword search, AND Meta Ad Library (free)
+- `content_scorer` + `content_analyzer` = full content pipeline
+- `reddit_thread_reader` + `reddit_subreddit_top` use free Reddit API (no key needed)
+- 4 free tools (no API key): `reddit_thread_reader`, `reddit_subreddit_top`, `content_scorer`, `content_analyzer`
+
+**Tool chains for affiliate skills:**
+- `trending-content-scout` → `x_search` + `reddit_subreddit_top` + `youtube_search` → `content_scorer`
+- `competitor-spy` → `facebook_scraper(ads)` + `x_user_posts` → `content_analyzer`
+- `content-research-brief` → `web_search` → `web_fetch` (multiple URLs) → `content_analyzer`
+- `traffic-analyzer` → `similarweb_traffic`
 
 ```bash
-# Install
+# Install (MCP — for Claude Code, Cursor, OpenClaw, Hermes)
 git clone https://github.com/sonpiaz/hidrix-tools.git ~/.hidrix-tools
 cd ~/.hidrix-tools && bun install && cp .env.example .env
 # Add your API keys to .env
+
+# Install (Pi — native extension, no MCP)
+cp -r ~/.hidrix-tools/integrations/pi-extension ~/.pi/agent/extensions/hidrix-tools
 ```
 
 ### [content-pipeline](https://github.com/Affitor/content-pipeline) — LinkedIn Content App

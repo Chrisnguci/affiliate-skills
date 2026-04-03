@@ -313,3 +313,31 @@ engagement_score = (likes × 2 + comments × 3 + shares × 5) / max(views, 1) ×
 | **Heavy usage / production** | YouTube Data API v3 + TikTok RapidAPI + Reddit official API |
 | **Academic research** | Apply for TikTok Research API + YouTube Data API v3 |
 | **Agency / multiple clients** | Apify (flexible, per-run pricing) or SerpAPI (search-based) |
+| **MCP-compatible agent** | [hidrix-tools](https://github.com/sonpiaz/hidrix-tools) — one server, all platforms |
+
+---
+
+## hidrix-tools (MCP Server)
+
+If your agent supports MCP (Claude Code, Cursor, OpenClaw, Hermes) or you use Pi (native extension), [hidrix-tools](https://github.com/sonpiaz/hidrix-tools) provides all social data tools in one server:
+
+| hidrix-tools tool | Platform | API Key Needed? |
+|---|---|---|
+| `x_search`, `x_thread_reader`, `x_user_posts` | X/Twitter | `GETXAPI_KEY` ($0.001/call) |
+| `reddit_search` | Reddit | `RAPIDAPI_KEY` |
+| `reddit_thread_reader`, `reddit_subreddit_top` | Reddit | None (free API) |
+| `youtube_search` | YouTube | `RAPIDAPI_KEY` |
+| `tiktok_search` | TikTok | `RAPIDAPI_KEY` |
+| `facebook_scraper` (group/page/search) | Facebook | `APIFY_API_TOKEN` |
+| `facebook_scraper` (ads) | Meta Ad Library | `META_ADS_ACCESS_TOKEN` (free) |
+| `content_scorer`, `content_analyzer` | Analysis | None (built-in) |
+| `similarweb_traffic` | SimilarWeb | `SIMILAR_WEB_RAPIDAPI_KEY` |
+
+When hidrix-tools is connected, skills automatically get structured engagement data instead of web search estimates. The `trending-content-scout` skill benefits most — exact view counts, like ratios, and comment threads instead of scraped approximations.
+
+```bash
+# Setup
+git clone https://github.com/sonpiaz/hidrix-tools.git ~/.hidrix-tools
+cd ~/.hidrix-tools && bun install && cp .env.example .env
+# Add API keys to .env, then connect via MCP config
+```
