@@ -5,7 +5,8 @@
   "scripts": {
     "build": "bun build --compile tools/src/cli.ts --outfile tools/dist/affiliate-check",
     "dev": "bun run tools/src/cli.ts",
-    "test": "bun test tools/test/"
+    "test": "bun test tools/test/",
+    "test:registry": "bun run tests/test-registry-invariants.ts"
   },
   "license": "MIT",
   "devDependencies": {}
