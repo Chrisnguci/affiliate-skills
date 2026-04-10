@@ -10,6 +10,14 @@
 
 Works with: **Claude Code** · **Pi** · **ChatGPT** · **Gemini CLI** · **Cursor** · **Windsurf** · **OpenClaw** · **any AI that reads text**
 
+## Repo structure
+
+- `skills/{stage}/{skill-name}/SKILL.md` — main skill definitions
+- `shared/references/` — shared doctrine, compliance, and flywheel references
+- `tools/src/` — affiliate-check CLI source
+- `registry.json` — machine-readable skill catalog
+- `evals/` — evaluation cases and results
+
 ### Install
 
 ```bash
